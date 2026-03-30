@@ -35,6 +35,9 @@ This is the most common failure point in computational social science papers. Th
 | Topic distributions | Thematic emphasis in a corpus | Conscious framing strategies (without additional evidence) |
 | Word frequency change | Changing salience of a concept | Change in meaning (frequency ≠ meaning) |
 | Sentiment scores | Aggregate emotional valence in texts | Individual emotional states |
+| CMDist / projection magnitude | **Boundary strength** — sharpness of the classificatory distinction in discourse | Degree of individual commitment to the distinction |
+| Change in CMDist / normed estimate across time | **Boundary change** — shift in form or strength of symbolic boundary | Intentional boundary-drawing; social boundary outcomes |
+| Inclusion–exclusion proximity contrast | Symbolic boundary as enacted through classificatory practice | Social boundary (resource exclusion) without additional evidence |
 
 ### Diagnostic questions
 
@@ -73,6 +76,31 @@ Two newspapers, same period, different semantic neighbourhoods for "liberty." Wh
 
 ---
 
+## Two-Mechanism Symbolic Boundary Frameworks
+
+When a study analyses **two distinct boundary types**, each mechanism must map to a structurally appropriate measure. Do not use one metric for both.
+
+| Boundary type | Semantic structure | Correct operationalisation |
+|--------------|-------------------|---------------------------|
+| **Moral exclusion** (e.g. dehumanisation) | Cluster / region | Centroid of seed words + CMDist (cosine proximity) |
+| **Cultural exclusion** (e.g. essentialism) | Axis / direction | Contrastive direction vector + projection score |
+
+### Diagnostic: Is my concept a region or an axis?
+
+Before choosing a metric, ask:
+
+1. **Is there a coherent bipolar contrast?** (e.g. changeable ←→ innate) → use direction + projection
+2. **Do sub-components cluster together without a natural opposite pole?** (e.g. animalistic + objectifying + disgusting) → use centroid + CMDist
+3. **Run PairDir on candidate offset vectors** (see `anchor-quality-metrics.md`): PairDir > 0.3 = direction viable; < 0.3 = use centroid
+
+### Method statement template
+
+> [Boundary type A] is operationalised as semantic proximity to a [concept] centroid, reflecting a clustered rather than directional semantic structure; measured by CMDist. [Boundary type B] is operationalised as a semantic direction contrasting [pole 1] with [pole 2]; measured by projection of ALC context embeddings onto the direction vector.
+
+For full R implementation, see `embedding-analysis/references/symbolic-boundary-measurement.md`.
+
+---
+
 ## Operationalising Abstract Constructs
 
 ### Step 1: Decompose the construct
@@ -103,6 +131,49 @@ for (word in indicator_words) {
 ### Step 4: State the linking assumption explicitly
 
 In the methods section: "I treat the semantic neighbourhood of *X* as a proxy for [theoretical construct], under the assumption that [linking assumption]. This operationalisation is valid to the extent that [scope condition]."
+
+---
+
+## Operationalising Boundary Concepts
+
+### Symbolic Boundary
+
+Symbolic boundaries are operationalised through **patterns of exclusion and inclusion** — semantic proximity profiles that capture how actors enact classificatory distinctions in practice (Vila-Henninger 2015).
+
+| Component | Operationalisation |
+|-----------|-------------------|
+| Inclusion side | Cosine proximity of target group label to legitimising vocabulary (dignity, rights, community) |
+| Exclusion side | Cosine proximity of target group label to stigmatising vocabulary (threat, filth, animal) |
+| Symbolic boundary | The contrast: inclusion proximity − exclusion proximity |
+
+### Boundary Strength
+
+**Definition**: degree of commitment to a classificatory judgement (Vila-Henninger 2015).
+
+Computationally: *how sharp and consistent* is the semantic distinction?
+
+| Proxy | Method |
+|-------|--------|
+| Magnitude of inclusion–exclusion contrast | `boundary_score = prox_incl − prox_excl`; larger absolute value = stronger boundary |
+| Consistency across sub-corpora | SD of normed estimates across press types / regions; low SD = stronger, more shared boundary |
+| CMDist to exclusion centroid | Higher proximity to the dehumanisation/stigma region = stronger moral exclusion boundary |
+
+Do not conflate boundary strength with boundary *presence*. A small contrast may still be statistically significant; report both magnitude and CI.
+
+### Boundary Change
+
+**Definition**: changes over time in the forms and strength of classificatory distinctions (Vila-Henninger 2015).
+
+Two separable dimensions:
+
+| Dimension | What changes | How to detect |
+|-----------|-------------|--------------|
+| **Form** | Which semantic associations organise the distinction | Shift in NNS neighbours across periods; change in direction of ALC coefficient vectors |
+| **Strength** | How sharp or committed the distinction is | Change in magnitude of normed ALC estimate or CMDist across time periods |
+
+Use a time-factor ALC regression: coefficient *direction* captures form change; *magnitude* captures strength change. See `thesis-writing/references/theoretical-framing.md § Boundary Change` for the R template.
+
+**Common error**: reporting a change in word frequency as boundary change. Frequency change = salience; boundary change requires evidence that the *semantic associations* (not just the rate of use) shifted.
 
 ---
 
