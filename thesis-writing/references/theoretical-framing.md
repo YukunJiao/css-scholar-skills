@@ -77,11 +77,20 @@ If your theoretical contribution is a two-dimensional or multi-dimensional frame
 | Dimension 1: [name] | [how measured in data] | [specific target words / NNS / coefficient] |
 | Dimension 2: [name] | [how measured in data] | [specific covariate / subgroup analysis] |
 
-### Example
+### Example (epistemic boundary study)
 
 | Dimension | Operationalisation | Method |
 |-----------|-------------------|--------|
 | Boundary classification | Which semantic register does a concept occupy? | NNS of target words |
 | Normative orientation | How positively does each community orient toward the boundary? | Press type coefficients in conText regression |
+
+### Example (symbolic boundary / othering study)
+
+| Dimension | Theoretical construct | Semantic structure | Method |
+|-----------|----------------------|-------------------|--------|
+| Moral exclusion | Dehumanisation | Cluster / region | Centroid of animalistic + objectifying + moral-disgust seeds; CMDist |
+| Cultural exclusion | Essentialism | Axis / direction | Contrastive direction (changeable ←→ innate); projection of ALC embeddings |
+
+**Key principle**: the method choice (CMDist vs. projection) must follow from the geometric structure of the concept, not from convenience. Dehumanisation is not directional — forcing it onto an axis produces low PairDir scores and unstable estimates. See `embedding-analysis/references/symbolic-boundary-measurement.md`.
 
 Without this mapping, the two-dimensional framework remains rhetorical — it must do empirical work.

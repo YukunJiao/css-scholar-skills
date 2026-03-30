@@ -18,6 +18,8 @@ dependencies: [conText, quanteda, text2vec, dplyr, ggplot2, ggrepel]
 | Estimate how group/covariate membership shifts word meaning | `conText()` regression — covariate coefficients |
 | Compare meaning across discourse communities | Include community as factor in formula |
 | Align embeddings across sub-corpora | Train GloVe jointly on all sub-corpora — no Procrustes needed |
+| Measure proximity to a clustered concept (e.g. dehumanisation) | Centroid + CMDist — see `references/symbolic-boundary-measurement.md` |
+| Measure position on a bipolar semantic axis (e.g. essentialism) | Direction vector + projection — see `references/symbolic-boundary-measurement.md` |
 
 **Do NOT** train separate GloVe models per period and compare vectors directly — the resulting spaces are not aligned and cosine similarities are not comparable across models.
 

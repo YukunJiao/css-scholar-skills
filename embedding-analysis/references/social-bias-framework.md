@@ -28,6 +28,19 @@ Social psychologists identify several psychological components of dehumanisation
 | **Animalistic dehumanisation** | Co-occurrence with vermin/animal terms | NNS with animal seed words |
 | **Mechanistic dehumanisation** | Co-occurrence with cold/object/machine terms | NNS with mechanistic seed words |
 
+### Why dehumanisation is a region, not a direction
+
+A common error is to construct a `human ←→ non-human` semantic axis for dehumanisation. This fails because:
+
+- The sub-components (animalistic, objectifying, morally degrading) do **not** align along a single axis — they scatter across multiple dimensions
+- "Human" has no clean contrastive anchor that captures all forms of dehumanisation simultaneously
+
+**Consequence**: Low PairDir scores; noisy, non-replicable direction vector.
+
+**Correct approach**: Treat dehumanisation as a **semantic region** (cluster), not an axis. Use cosine proximity to a concept centroid (CMDist) rather than projection onto a direction vector. See `symbolic-boundary-measurement.md` for the full operationalisation.
+
+This contrasts with **essentialism**, which *is* structurally directional (changeable/social ←→ innate/fixed) and should be operationalised as a direction + projection.
+
 ### Approach A: Embedding Neighbour Valence
 
 Train word embeddings on the corpus. For each target group label, retrieve the *k* nearest semantic neighbours. Compute the average valence score of those neighbours using a valence lexicon (NRC VAD, ANEW, or similar).

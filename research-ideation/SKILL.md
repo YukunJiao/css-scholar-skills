@@ -73,6 +73,31 @@ Two newspapers, same period, different semantic neighbourhoods for "liberty." Wh
 
 ---
 
+## Two-Mechanism Symbolic Boundary Frameworks
+
+When a study analyses **two distinct boundary types**, each mechanism must map to a structurally appropriate measure. Do not use one metric for both.
+
+| Boundary type | Semantic structure | Correct operationalisation |
+|--------------|-------------------|---------------------------|
+| **Moral exclusion** (e.g. dehumanisation) | Cluster / region | Centroid of seed words + CMDist (cosine proximity) |
+| **Cultural exclusion** (e.g. essentialism) | Axis / direction | Contrastive direction vector + projection score |
+
+### Diagnostic: Is my concept a region or an axis?
+
+Before choosing a metric, ask:
+
+1. **Is there a coherent bipolar contrast?** (e.g. changeable ←→ innate) → use direction + projection
+2. **Do sub-components cluster together without a natural opposite pole?** (e.g. animalistic + objectifying + disgusting) → use centroid + CMDist
+3. **Run PairDir on candidate offset vectors** (see `anchor-quality-metrics.md`): PairDir > 0.3 = direction viable; < 0.3 = use centroid
+
+### Method statement template
+
+> [Boundary type A] is operationalised as semantic proximity to a [concept] centroid, reflecting a clustered rather than directional semantic structure; measured by CMDist. [Boundary type B] is operationalised as a semantic direction contrasting [pole 1] with [pole 2]; measured by projection of ALC context embeddings onto the direction vector.
+
+For full R implementation, see `embedding-analysis/references/symbolic-boundary-measurement.md`.
+
+---
+
 ## Operationalising Abstract Constructs
 
 ### Step 1: Decompose the construct
