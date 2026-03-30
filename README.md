@@ -26,7 +26,11 @@ Each SKILL is a self-contained document that an AI assistant (or human collabora
 | `tar_make()` stuck / OOM | [r-targets-pipeline § Memory Management](r-targets-pipeline/SKILL.md#memory-management) |
 | Worker: `could not find function X` | [r-targets-pipeline § Package Configuration](r-targets-pipeline/SKILL.md#package-configuration) |
 | Selecting and validating anchor words | [embedding-analysis § Anchor Word Selection](embedding-analysis/SKILL.md#anchor-word-selection) |
+| Testing whether anchor words form a coherent semantic axis | [embedding-analysis § Anchor Quality Metrics](embedding-analysis/references/anchor-quality-metrics.md) |
+| Measuring social bias / dehumanisation with embeddings | [embedding-analysis § Social Bias Framework](embedding-analysis/references/social-bias-framework.md) |
+| Ideology scaling and trajectory analysis | [embedding-analysis § Ideology Scaling](embedding-analysis/references/ideology-scaling.md) |
 | Choosing between boundary work and cultural classification | [thesis-writing § Theoretical Framing](thesis-writing/SKILL.md#theoretical-framing-key-decision) |
+| Applying othering / us-them framing to corpus results | [thesis-writing § Othering Theory](thesis-writing/references/othering-theory.md) |
 | Theory-method alignment check | [research-ideation § Theory-Method Alignment](research-ideation/SKILL.md#theory-method-alignment) |
 | Framing contributions for different journals | [research-ideation § Contribution Framing](research-ideation/SKILL.md#contribution-framing) |
 
@@ -62,12 +66,16 @@ skills/
 ├── embedding-analysis/
 │   ├── SKILL.md
 │   └── references/
-│       └── anchor-selection.md       ← frequency checks, OCR validation, exclusion rationale
+│       ├── anchor-selection.md       ← frequency checks, OCR validation, exclusion rationale
+│       ├── anchor-quality-metrics.md ← PairDir & ACS metrics for evaluating anchor coherence
+│       ├── social-bias-framework.md  ← dehumanisation / othering / label variation with embeddings
+│       └── ideology-scaling.md       ← ideology space construction, t-SNE/PCA, trajectory analysis
 │
 ├── thesis-writing/
 │   ├── SKILL.md
 │   └── references/
-│       └── theoretical-framing.md    ← boundary work vs. cultural classification decision guide
+│       ├── theoretical-framing.md    ← boundary work vs. cultural classification decision guide
+│       └── othering-theory.md        ← othering / us-them framing, dogwhistle semantics
 │
 └── research-ideation/
     ├── SKILL.md
